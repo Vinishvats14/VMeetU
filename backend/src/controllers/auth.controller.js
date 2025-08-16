@@ -11,11 +11,12 @@ const generateTokenAndSetCookie = (res, userId) => {
 
   res.cookie("accessToken", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // Only on HTTPS in production
-    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", // ✅ Lax for development
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    secure: true,          // Render + Netlify dono https hai
+    sameSite: "none",      // cross-origin ke liye required
+    maxAge: 24 * 60 * 60 * 1000,
   });
 };
+
 
 export async function signup(req, res) {
     const { email, password, fullname } = req.body;
