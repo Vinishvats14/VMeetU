@@ -46,13 +46,13 @@ It combines social networking and language learning with a smooth user interface
 ## Screenshots
 
 ### Signup, Onboarding, Login  
-![Signup](./public/signup.png)  
-![Onboarding](./public/onboarding.png)  
-![Login](./public/login.png)  
+![Signup](./client/public/signup.png)  
+![Onboarding](./client/public/onboarding.png)  
+![Login](./client/public/login.png)  
 
 ### Home Page and Notifications  
-![Home](./public/home.png)  
-![Notifications](./public/notifications.png)  
+![Home](./client/public/home.png)  
+![Notifications](./client/public/notification.png)  
 
 
 ## Tech Stack
