@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- thisss whole file is good if you make this because it helps in clearing browser already stored cookie -->
+    <title>Clear Auth Cookies</title>
+</head>
+<body>
+    <h1>Clearing Authentication Data...</h1>
+    <script>
+        // Clear all cookies
+        document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        
+        // Clear storage
+        localStorage.clear();
+        sessionStorage.clear();
+        
+        // Redirect to login
+        setTimeout(() => {
+            window.location.href = 'http://localhost:5173/login';
+        }, 1000);
+        
+        document.body.innerHTML += '<p>Cookies cleared! Redirecting to login...</p>';
+    </script>
+</body>
+</html>
