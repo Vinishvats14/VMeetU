@@ -1,4 +1,3 @@
-import OnboardingPage from "../pages/OnboardingPage";
 import { axiosInstance } from "./axios";
 
 export const signup = async (signupData) => {
