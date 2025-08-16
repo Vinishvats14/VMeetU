@@ -28,6 +28,11 @@ app.use(
 app.use(express.json());
 app.use(cookieParser()); // Ensure cookie parser is used to read cookies that comes from frontend
 
+app.get('/', (req, res) => {
+  res.json({ message: "Backend server is running 🚀" });
+});
+
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/chat', chatRoutes);
