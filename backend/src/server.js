@@ -36,6 +36,16 @@ app.use(cors(corsOptions));
 // Ensure preflight requests are handled for all routes
 app.options('*', cors(corsOptions));
 
+// Debug middleware: log origin and cookies for incoming requests
+app.use((req, res, next) => {
+  try {
+    console.log('[CORS DEBUG] origin=', req.headers.origin, 'path=', req.path, 'cookies=', req.headers.cookie);
+  } catch (e) {
+    console.log('[CORS DEBUG] could not read headers', e.message);
+  }
+  next();
+});
+
 
 app.use(express.json());
 app.use(cookieParser()); // Ensure cookie parser is used to read cookies that comes from frontend
