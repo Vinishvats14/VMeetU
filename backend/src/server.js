@@ -17,14 +17,24 @@ const PORT = process.env.PORT || 1410;
 
 const __dirname = path.resolve();
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
-    credentials: true, // allow frontend to send cookies
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// Allow both configured client URL and localhost during development.
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"].filter(Boolean);
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin like curl or mobile apps
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true, // allow frontend to send cookies
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200, // some browsers (legacy) choke on 204
+};
+
+app.use(cors(corsOptions));
+// Ensure preflight requests are handled for all routes
+app.options('*', cors(corsOptions));
 
 
 app.use(express.json());

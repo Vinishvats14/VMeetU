@@ -9,12 +9,15 @@ const generateTokenAndSetCookie = (res, userId) => {
     expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "1d",
   });
 
-  res.cookie("accessToken", token, {
-    httpOnly: true,
-    secure: true,          // Render + Netlify dono https hai
-    sameSite: "none",      // cross-origin ke liye required
-    maxAge: 24 * 60 * 60 * 1000,
-  });
+    // Use secure cookies and SameSite=None only in production (HTTPS).
+    // For local development (HTTP) set secure: false so cookies can be set.
+    const isProd = process.env.NODE_ENV === 'production';
+    res.cookie("accessToken", token, {
+        httpOnly: true,
+        secure: isProd,
+        sameSite: isProd ? "none" : "lax",
+        maxAge: 24 * 60 * 60 * 1000,
+    });
 };
 
 
